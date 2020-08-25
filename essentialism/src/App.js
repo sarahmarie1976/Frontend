@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from './components/Login';
@@ -5,6 +6,9 @@ import Project from './components/Project';
 import User from './components/User';
 import PrivateRoute from './components/PrivateRoute';
 
+=======
+import React from 'react';
+>>>>>>> 5d7ff7fa1021f95dbe30eabfa23ddaa988223dde
 
 import './App.css';
 
