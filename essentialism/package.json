@@ -15,10 +15,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-uuid": "^1.0.2",
-<<<<<<< HEAD
     "reactstrap": "^8.5.1",
-=======
->>>>>>> 5d7ff7fa1021f95dbe30eabfa23ddaa988223dde
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"

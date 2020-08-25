@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { useHistory, NavLink } from 'react-router-dom';
-
-import {axiosWithAuth} from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { Form, Label, Input, FormGroup, Navbar, Button, Card, CardHeader,  NavItem, Nav } from 'reactstrap';
 
 const Login = () => {
