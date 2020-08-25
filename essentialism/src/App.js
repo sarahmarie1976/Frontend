@@ -1,12 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Login from './components/Login';
+import Project from './components/Project';
+import User from './components/User';
+import PrivateRoute from './components/PrivateRoute';
+
+
 import './App.css';
+
 
 function App() {
   return (
-    <div className="App">
- <h1> App is running</h1>
-    </div>
+    <Router>
+      
+      <div className="App">
+        <PrivateRoute exact path="/projects" component={Project}  />
+        <Route exact path="/users/:id" component={User} />
+        <Route exact path="/" component={Login} />
+
+
+        {/* 
+          Build a PrivateRoute component that will 
+          display Projects  when you're authenticated 
+        */}
+        
+      </div>
+    </Router>
   );
 }
 
