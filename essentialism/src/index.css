@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-image: url("https://i.postimg.cc/MpRbm567/dose-media-b-U6-Jyh-SI6zo-unsplash.jpg"); */
+  background-color: #DCFFDB;
+  
+  /* background-repeat: no-repeat; */
+  background-size: 1950px 970px; 
 }
 
 code {

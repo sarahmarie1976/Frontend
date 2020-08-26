@@ -7,18 +7,16 @@ import thunk from 'redux-thunk';
 
 import './index.css';
 
-
-
 import App from './App';
-// import rootReducer from './reducer/reducer';
+import rootReducer from './reducer/reducer';
 
-// const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
-	// <Provider store={store}>
+	<Provider store={store}>
 		<App />,
-	// </Provider>,
+	</Provider>,
 	rootElement,
 );
 

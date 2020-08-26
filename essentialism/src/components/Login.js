@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import { useHistory, NavLink } from 'react-router-dom';
-
-// import {axiosWithAuth} from '../utils/axiosWithAuth';
-import { Form, Label, Input, FormGroup, Navbar, Button, Card, CardHeader,  NavItem } from 'reactstrap';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { Form, Label, Input, FormGroup, Navbar, Button, Card, CardHeader,  NavItem, Nav } from 'reactstrap';
 
 const Login = () => {
   const [login, setLogin] = useState({ 
@@ -25,43 +24,45 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // axiosWithAuth()
-    //   .post(`api/login`, login)
-    //   .then((res) => {
-    //     localStorage.setItem('token', res.data.payload);
-    //     setLogin({
-    //        username: '', password: ''
-    //     })
-    //     push('/bubbles');
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
+    axiosWithAuth()
+      .post(`api/auth/login`, login)
+      .then((res) => {
+        localStorage.setItem('token', res.data.token);
+        setLogin({
+           username: '', password: ''
+        })
+        push('/projects');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (
     <>
     <div>
-      <Navbar style={{  }} >
-        <NavItem>
-          <NavLink style={{ padding: '2px', margin: '10px' }} to='/'>Login</NavLink>
-        </NavItem>
+      <Navbar  >
+        <Nav>
+          <NavItem >  
+          <NavLink style={{ padding: '10px', fontSize: '18px', fontWeight: 'bolder', color: '#696969', /*textShadow: '2px 2px 2px #000000'*/ }} to='/'>Login</NavLink>
+          </NavItem> 
 
-        <NavItem>
-          <NavLink style={{ padding: '2px', margin: '3px' }}   to=''>Projects</NavLink>
-        </NavItem>
+          <NavItem>  
+          <NavLink style={{ padding: '10px', fontSize: '18px', fontWeight: 'bolder', color: '#696969', /*textShadow: '2px 2px 2px #000000'*/  }}   to='/projects'>Projects</NavLink>
+          </NavItem>
+        </Nav>
 
       </Navbar>
       </div>
 
-      <Card  style={{ margin: '5%', height: '400px', marginLeft: '30%', border: 'none', background: 'transparent' }}>
+      <Card  style={{ margin: '5%', width: '35%', height: '400px', marginLeft: '35%', border: 'none', background: 'transparent' }}>
         
-      <CardHeader style={{ border: 'none', background: 'transparent' }} >Welcome to the Essentialism App! "Keep it simple. Do what matters."</CardHeader>
+      <CardHeader style={{ border: 'none', background: 'transparent', fontSize: '50px',  fontWeight: 'bolder', color: '#696969', /*textShadow: '2px 2px 2px #000000'*/ }} >Welcome to the Essentialism App! "Keep it simple. Do what matters."</CardHeader>
     
 
       <Form onSubmit={handleSubmit} >
 
-        <FormGroup >
+        <FormGroup style={{  fontWeight: 'bolder',  fontSize: '20px', color: '#696969', /*textShadow: '2px 2px 2px #000000'*/ }} >
           <Label >Username</Label>
           <Input 
             type='text'
@@ -72,7 +73,7 @@ const Login = () => {
             />
         </FormGroup>
 
-        <FormGroup >
+        <FormGroup style={{ fontWeight: 'bolder',  fontSize: '20px', color: '#696969', /*textShadow: '2px 2px 2px #000000'*/ }} >
           <Label >Password</Label>
           <Input 
             type='text'
@@ -83,7 +84,7 @@ const Login = () => {
             />
         </FormGroup>
 
-        <Button style={{  background: 'lightseagreen', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ' }} >Submit</Button>
+        <Button style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ', width: '40%' }} >Submit</Button>
 
       </Form>
       </Card>
