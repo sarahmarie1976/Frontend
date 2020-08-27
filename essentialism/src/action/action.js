@@ -50,6 +50,7 @@ export const addProject = ( addedProject ) => {
           summary: addedProject.summary,
           importance: addedProject.importance,
           value_name:addedProject.value_name,
+          values:addedProject.values
         //   user_id: addedProject.user_id
 
           })
