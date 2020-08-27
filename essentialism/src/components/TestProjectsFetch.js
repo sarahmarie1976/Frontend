@@ -7,11 +7,6 @@ import  { axiosWithAuth }  from '../action/action'
 import { removeProject } from '../action/action'
 
 
-
-
-
-
-
 class TestProjectsFetch extends React.Component {
     constructor(props) {
     super(props)
