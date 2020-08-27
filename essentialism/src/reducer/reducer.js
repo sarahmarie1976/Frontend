@@ -30,10 +30,10 @@ const projectsReducer = (state = initialState, actions) => {
                     error: actions.payload,
                 } 
             case POST_DATA:
-                return{
+                return {
                     ...state,
                     isPosting: true, 
-                    projects: [...state.projects]
+                    projects: [...state.projects, actions.payload]
                 }
             case POST_SUCCESS:
                 return{

@@ -32,9 +32,9 @@ export const getData = () => {
     return dispatch => {
       dispatch({ type: FETCH_DATA })
       axiosWithAuth()
-      .get('/api/projects')
+      .get('/projects')
         .then(response => {
-        //   console.log('getData GET request', response)
+          console.log('getData GET request', response)
           dispatch({ type: FETCH_SUCCESS, payload: response.data })
         })
         .catch(err => {
@@ -44,13 +44,4 @@ export const getData = () => {
   }
 
 
-  const deleteFunction = (projectID) => {
-    return dispatch => {
-        console.log("testing delete", projectID)
-        dispatch({type: DELETE_REQ})
-        axiosWithAuth()
-        .delete(`/projects/:id`, projectID)
-        .then( res => { dispatch({type: DELETE_SUCCESS});
-    })
-    }
-}
+

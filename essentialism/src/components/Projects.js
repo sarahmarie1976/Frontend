@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, FormGroup, Input, Button, Label, Card, Col, Row, CardHeader } from 'reactstrap';
 
 
-const Projects = () =>{
+const Projects = () => {
 
     const [checked, setChecked] = useState({
         isChecked: false

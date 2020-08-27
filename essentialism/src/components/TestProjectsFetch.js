@@ -20,7 +20,6 @@ class TestProjectsFetch extends React.Component {
       this.props.getData()
     }
 
-    
     render() {
         return (
             <div>
@@ -41,8 +40,10 @@ class TestProjectsFetch extends React.Component {
               }) : <h2>Loading...</h2> }
             </div>
           )
-    }
+    
 }
+        
+    }
 
 const mapStateToProps = state => {
     return {
