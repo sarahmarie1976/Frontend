@@ -7,6 +7,7 @@ const initialState = {
     isFetching: false,
     isPosting: false,
     error: '',
+    
 }
 
 const projectsReducer = (state = initialState, actions) => {
