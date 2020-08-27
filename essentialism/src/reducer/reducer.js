@@ -1,4 +1,5 @@
-import { FETCH_DATA, FETCH_SUCCESS, FETCH_FAILURE, POST_DATA, POST_SUCCESS, POST_FAILURE } from '../action/action';
+import { FETCH_DATA, FETCH_SUCCESS, FETCH_FAILURE, POST_DATA, POST_SUCCESS, POST_FAILURE, DELETE_DATA, DELETE_SUCCESS, DELETE_FAILURE } from '../action/action';
+import { DELETE_REQ } from '../action/TestingActionFunctions'
 import axios from 'axios';
 
 const initialState = {
@@ -30,10 +31,10 @@ const projectsReducer = (state = initialState, actions) => {
                     error: actions.payload,
                 } 
             case POST_DATA:
-                return{
+                return {
                     ...state,
                     isPosting: true, 
-                    projects: [...state.projects]
+                    projects: [...state.projects, actions.payload]
                 }
             case POST_SUCCESS:
                 return{
@@ -46,7 +47,16 @@ const projectsReducer = (state = initialState, actions) => {
                     ...state,
                     isPosting: false, 
                     error: actions.payload 
-                }                  
+                }          
+                case DELETE_DATA:
+                    return {
+                    projects: state.projects.filter(item => {
+                        if (item.id !== actions.payload.id){
+                            return item
+                        } else return state.projects
+                    })
+                    }        
+                   
                 default:
                     return state  
         }
