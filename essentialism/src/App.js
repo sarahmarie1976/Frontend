@@ -6,7 +6,6 @@ import Projects from './components/Projects';
 import User from './components/User';
 import PrivateRoute from './components/PrivateRoute';
 import TestProjectsFetch from './components/TestProjectsFetch'
-
 import './App.css';
 import TestRegister from './components/TestRegister'
 
@@ -23,10 +22,7 @@ export default function App() {
         <Route exact path="/users/:id" component={User} />
         <Route exact path="/fetch" component={TestProjectsFetch} />
         <Route exact path="/" component={Login} />
-        {/* 
-          Build a PrivateRoute component that will 
-          display Projects  when you're authenticated 
-        */}
+       
         
       </div>
     </Router>
