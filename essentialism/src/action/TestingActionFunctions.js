@@ -32,7 +32,7 @@ export const getData = () => {
     return dispatch => {
       dispatch({ type: FETCH_DATA })
       axiosWithAuth()
-      .get('/projects')
+      .get('/projects ')
         .then(response => {
           console.log('getData GET request', response)
           dispatch({ type: FETCH_SUCCESS, payload: response.data })

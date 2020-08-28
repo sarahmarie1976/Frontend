@@ -31,7 +31,7 @@ const Login = () => {
         setLogin({
            username: '', password: ''
         })
-        push('/projects');
+        push('/fetch');
       })
       .catch((err) => {
         console.log(err);
