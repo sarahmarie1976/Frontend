@@ -11,19 +11,19 @@ export const DELETE_FAIL = 'DELETE_FAIL'
  
 
 
-export const updateProjects = (projectId) => {
-    return dispatch => {
-      dispatch({ type: PUT_DATA })
-      axiosWithAuth()
-      .get('/projects/:id',projectId)
-        .then(response => {
-         dispatch({ type: PUT_SUCCESS, payload: response.data })
-        })
-        .catch(err => {
-          dispatch({ type: PUT_FAIL, payload: err })
-        })
-    }
-  }
+// export const updateProjects = (projectId) => {
+//     return dispatch => {
+//       dispatch({ type: PUT_DATA })
+//       axiosWithAuth()
+//       .get('/projects/:id',projectId)
+//         .then(response => {
+//          dispatch({ type: PUT_SUCCESS, payload: response.data })
+//         })
+//         .catch(err => {
+//           dispatch({ type: PUT_FAIL, payload: err })
+//         })
+//     }
+//   }
 
   
 

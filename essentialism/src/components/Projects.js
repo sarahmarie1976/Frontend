@@ -1,8 +1,91 @@
 import React, { useState } from 'react';
 import { Form, FormGroup, Input, Button, Label, Card, Col, Row, CardHeader } from 'reactstrap';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { POST_DATA, POST_SUCCESS } from '../action/action'; 
+
+const initialProject = {
+  project: "",
+  "title": "",
+  "summary": "",
+  "importance": "",
+  "values": {value_name: ""}
+
+};  
+
+const Projects = (props) => {
+    const [projectToEdit, setProjectToEdit] = useState(initialProject);
+    const [editing, setEditing] = useState(false);
+    const [project, setProject] = useState({
+      "title": "",
+      "summary": "",
+      "importance": "",
+      "values": {value_name: ""}
+    })
+
+    
+
+const { push } = useHistory(); 
+
+ const editProject = (project) => {
+  setEditing(true);
+  setProjectToEdit(project);
+}  
+
+ const saveUpdate = e => {
+  e.preventDefault();
+  axiosWithAuth()
+  .put('/projects' , projectToEdit)
+  .then(res => {
+      console.log(res.data)
+      // setDependency(true)
+  })
+  .catch(err => {
+      console.log(err)
+  })
+  // How can we update the animal information?
+  // Where can we get the ID? 
+  // Where is the information stored?
+
+}
 
 
-const Projects = () => {
+const inputHandler = (event) => {
+    setProject({ ...project, [event.target.name]: event.target.value })
+}
+
+const submitHandler = (event) => {
+    event.preventDefault();
+    // props.postSmurfs(smurf)
+}
+
+const inputValues = (event) => {
+  setProject({
+    ...project, 
+    values: {value_name: event.target.value}
+  })
+}
+
+const addProject = (e) => {
+  return dispatch => {
+    dispatch({ type: POST_DATA })
+  e.preventDefault();
+  axiosWithAuth()
+    .post(`/projects`, projectToEdit)
+    .then((res) => {
+      console.log('addProject Post request', res)
+      dispatch({ type: POST_SUCCESS, payload: res.data })
+      setProject(res.data);
+      setProjectToEdit(project);
+      push('/fetch')
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+};
+
 
     const [checked, setChecked] = useState({
         isChecked: false
@@ -13,9 +96,9 @@ const Projects = () => {
         return (
 
             
-            <Form  style={{ margin: '5%', marginLeft: '20%' }}>
+            <Form id='project'  style={{ margin: '5%', marginLeft: '20%' }}>
 
-              <Card style={{border: 'none', background: 'transparent', color: '#DCFFDB', textShadow: '2px 1px 2px #000000', marginRight: '25%'   }}  >
+              <Card style={{border: 'none', background: 'transparent', color: '#696969', marginRight: '25%'   }}  >
                 <CardHeader style={{border: 'none', background: 'transparent', fontSize: '30px', fontWeight: 'bolder' }}  >
                   Select up to three Values for your project:
                 </CardHeader>
@@ -23,43 +106,84 @@ const Projects = () => {
 
               <Row>
                 <Col sm="1.8">
-              <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent', color: '#DCFFDB', textShadow: '2px 1px 2px #000000',  }} >
+              <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent', color: '#696969'  }} >
              
               <FormGroup check style={{ padding: '25px', width: '20%', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'space-evenly', alignItems: 'flex-start', fontSize: '18px', fontWeight: 'bold' }} >
                 <Label check>
-                  <Input type="checkbox" id='1'  />  Authenticity 
+                  <Input 
+                  type="checkbox" id='1' 
+                  value={project.values.value_name}
+                   onChange={inputValues} 
+                    />  Authenticity 
                 </Label>
               
                 <Label check>
-                   <Input type="checkbox" /> Achievement
+                   <Input 
+                   type="checkbox"
+                   id='2'
+                   value={project.values.value_name} 
+                   onChange={inputValues} 
+                   /> Achievement
                 </Label>
               
                 <Label check>
-                  <Input type="checkbox" /> Adventure
+                  <Input 
+                  type="checkbox"
+                  id='3' 
+                  value={project.values.value_name}
+                  onChange={inputValues} 
+                    /> Adventure
                 </Label>
               
                 <Label check>
-                   <Input type="checkbox" /> Authority
+                   <Input 
+                   type="checkbox"
+                   id='4' 
+                   value={project.values.value_name}
+                   onChange={inputValues}  /> Authority
                 </Label>
               
                 <Label check>
-                  <Input type="checkbox" /> Autonomy
+                  <Input 
+                  type="checkbox"
+                  id='5'
+                  value={project.values.value_name} 
+                  onChange={inputValues}  /> Autonomy
                 </Label>
               
                 <Label check>
-                   <Input type="checkbox" /> Balance
+                   <Input 
+                   type="checkbox"
+                   id='6' 
+                   value={project.values.value_name}
+                   onChange={inputValues} 
+                    /> Balance
                 </Label>
               
                 <Label check>
-                  <Input type="checkbox" /> Beauty
+                  <Input 
+                  type="checkbox"
+                  id='7' 
+                  value={project.values.value_name}
+                  onChange={inputValues}  /> Beauty
                 </Label>
               
                 <Label check>
-                   <Input type="checkbox" /> Boldness
+                   <Input 
+                   type="checkbox" 
+                   id='8' 
+                   value={project.values.value_name}
+                   onChange={inputValues} 
+                   /> Boldness
                 </Label>
               
                 <Label check>
-                  <Input type="checkbox" /> Career
+                  <Input 
+                  type="checkbox"
+                  id='9' 
+                  value={project.values.value_name}
+                  onChange={inputValues} 
+                    /> Career
                 </Label>
 
                 </FormGroup>
@@ -67,7 +191,7 @@ const Projects = () => {
                 </Col>
 
                 <Col sm="1.8">
-            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent', color: '#DCFFDB', textShadow: '2px 1px 2px #000000' }} >
+            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent', color: '#696969',  }} >
 
             <FormGroup check style={{ padding: '25px', width: '20%', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'space-evenly', alignItems: 'flex-start', fontSize: '18px', fontWeight: 'bold' }} >
 
@@ -112,7 +236,7 @@ const Projects = () => {
                 </Col>
 
                 <Col sm="1.8">
-            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly', border: 'none', background: 'transparent', color: '#DCFFDB', textShadow: '2px 1px 2px #000000'}} >
+            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly', border: 'none', background: 'transparent', color: '#696969'}} >
 
             <FormGroup check style={{ padding: '25px', width: '20%', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'space-evenly', alignItems: 'flex-start', fontSize: '18px', fontWeight: 'bold' }} >
                 <Label check>
@@ -156,7 +280,7 @@ const Projects = () => {
                 </Col>
 
               <Col sm="1.8">
-            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent', color: '#DCFFDB', textShadow: '2px 1px 2px #000000' }} >
+            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent', color: '#696969',  }} >
 
             <FormGroup check style={{ padding: '25px', width: '20%', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'space-evenly', alignItems: 'flex-start', fontSize: '18px', fontWeight: 'bold' }} >
                 <Label check>
@@ -196,7 +320,7 @@ const Projects = () => {
                 </Col>
 
             <Col sm="1.8">
-            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent' , color: '#DCFFDB', textShadow: '2px 1px 2px #000000'}} >
+            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent' , color: '#696969', }} >
 
             <FormGroup check style={{ padding: '25px', width: '20%', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'space-evenly', alignItems: 'flex-start', fontSize: '18px', fontWeight: 'bold' }} >
 
@@ -238,7 +362,7 @@ const Projects = () => {
                 </Col>
 
               <Col sm="1.8">
-              <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent', color: '#DCFFDB', textShadow: '2px 1px 2px #000000' }} >
+              <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly',  border: 'none', background: 'transparent', color: '#696969',  }} >
 
               <FormGroup check style={{ padding: '25px', width: '20%', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'space-evenly', alignItems: 'flex-start', fontSize: '18px', fontWeight: 'bold' }} >
 
@@ -285,7 +409,7 @@ const Projects = () => {
                 </Col>
 
             <Col sm="1.8">
-            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly', border: 'none', background: 'transparent', color: '#DCFFDB', textShadow: '2px 1px 2px #000000'}} >
+            <Card style={{ width: '15%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-evenly', border: 'none', background: 'transparent', color: '#696969', }} >
 
             <FormGroup check style={{ padding: '25px', width: '20%', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'space-evenly', alignItems: 'flex-start', fontSize: '18px', fontWeight: 'bold' }} >
               
@@ -329,41 +453,40 @@ const Projects = () => {
 
 
 
-              <FormGroup style={{ width: '40%', margin: '2%', marginLeft: '22%', color: '#DCFFDB', fontWeight: 'bolder', textShadow: '2px 1px 2px #000000', fontSize: '20px' }} >
+              <FormGroup style={{ width: '40%', margin: '2%', marginLeft: '22%', color: '#696969', fontWeight: 'bolder', fontSize: '20px' }} >
                 <Label >Project Title</Label>
-                <Input type='text' name='title' placeholder='Project Title Here' />
+                <Input type='text' name='title' placeholder='Project Title Here' value={project.title}  onChange={inputHandler} />
               </FormGroup>
 
-              <FormGroup style={{ width: '40%', margin: '2%', marginLeft: '22%', color: '#DCFFDB', fontWeight: 'bolder', textShadow: '2px 1px 2px #000000', fontSize: '20px' }} >
+              <FormGroup style={{ width: '40%', margin: '2%', marginLeft: '22%', color: '#696969', fontWeight: 'bolder',  fontSize: '20px' }} >
                 <Label >Project Description</Label>
-                <Input Input type="textarea" name="text" placeholder='Enter Description Here' />
+                <Input Input type="textarea" name="text" placeholder='Enter Description Here' value={project.text}  onChange={inputHandler} />
               </FormGroup>
 
-              <FormGroup row style={{ width: '60%', margin: '3%', marginLeft: '35%', color: '#DCFFDB', fontWeight: 'bolder', textShadow: '2px 1px 2px #000000', fontSize: '20px' }} >
+              <FormGroup row style={{ width: '60%', margin: '3%', marginLeft: '35%', color: '#696969', fontWeight: 'bolder',  fontSize: '20px' }} >
                 <Label for="importance">Level of Importance</Label> 
                 <Col sm={10}>
-                  <Input  style={{ width: '8%', margin: '1%', marginLeft: '8%' }} type="select" name="select" id="importance"  >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
+                  <Input  style={{ width: '10%', margin: '1%', marginLeft: '8%' }} type='text' name="select" id="importance" /* value={project.importance} onChange={inputHandler} */ >
+                    
                   </Input>
 
                 </Col>
             </FormGroup>
 
-              <Button style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ', width: '20%',margin: '2%', marginRight: '18%',   }} >Submit</Button>
+              <Button type='submit' onSubmit={submitHandler} style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' ,  width: '20%',margin: '2%', marginRight: '18%',   }} >Submit</Button>
               
              
             </Form>
           );
         }
 
+    const mapStateToProps = (state) => {
+      return {
+        projects: state.projects
+      }
+    }
 
-export default Projects;
+export default connect(
+  mapStateToProps,
+  {}
+)(Projects);
