@@ -6,7 +6,6 @@ import Projects from './components/Projects';
 import User from './components/User';
 import PrivateRoute from './components/PrivateRoute';
 import TestProjectsFetch from './components/TestProjectsFetch'
-
 import './App.css';
 import TestRegister from './components/TestRegister'
 
