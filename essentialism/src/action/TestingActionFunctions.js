@@ -29,10 +29,14 @@ export const DELETE_FAIL = 'DELETE_FAIL'
 
 
 export const getData = () => {
+  console.log('was fired ***')
     return dispatch => {
       dispatch({ type: FETCH_DATA })
       axiosWithAuth()
-      .get('/projects ')
+      .get('/projects ',  { headers: {
+        'Authorization': `Bearer ${localStorage.token}`
+      }})
+
         .then(response => {
           console.log('getData GET request', response)
           dispatch({ type: FETCH_SUCCESS, payload: response.data })
@@ -40,6 +44,7 @@ export const getData = () => {
         .catch(err => {
           dispatch({ type: FETCH_FAILURE, payload: err })
         })
+
     }
   }
 

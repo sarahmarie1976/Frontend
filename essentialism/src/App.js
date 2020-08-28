@@ -22,10 +22,7 @@ export default function App() {
         <Route exact path="/users/:id" component={User} />
         <Route exact path="/fetch" component={TestProjectsFetch} />
         <Route exact path="/" component={Login} />
-        {/* 
-          Build a PrivateRoute component that will 
-          display Projects  when you're authenticated 
-        */}
+       
         
       </div>
     </Router>

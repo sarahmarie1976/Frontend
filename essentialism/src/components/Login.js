@@ -25,7 +25,9 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post(`/auth/login`, login)
+      .post(`/auth/login`, login,   { headers: {
+        'Authorization': `Bearer ${localStorage.token}`
+      }})
       .then((res) => {
         localStorage.setItem('token', res.data.token);
         setLogin({

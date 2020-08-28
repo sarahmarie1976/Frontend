@@ -12,9 +12,11 @@ export const DELETE_FAILURE = 'DELETE_FAILURE'
 
 export const removeProject = ( project ) => {
     return () => {
-      console.log('remove project action creator', project)
+      console.log('remove project action creator')
       axiosWithAuth()
-      .delete(`/api/projects/${project}`)
+      .delete(`/projects/${project}`,   { headers: {
+        'Authorization': `Bearer ${localStorage.token}`
+      }})
     }
   }
 
