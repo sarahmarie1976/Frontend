@@ -55,7 +55,9 @@ const projectsReducer = (state = initialState, actions) => {
                             return item
                         } else return state.projects
                     })
-                    }        
+                } 
+                
+                           
                    
                 default:
                     return state  
