@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from './components/Login';
 import Projects from './components/Projects';
-
 import User from './components/User';
 import PrivateRoute from './components/PrivateRoute';
 import TestProjectsFetch from './components/TestProjectsFetch'

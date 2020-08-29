@@ -8,6 +8,7 @@ import { removeProject } from '../action/action'
 import { useHistory } from 'react-router-dom'
 import Projects from './Projects'
 import PrivateRoute from './PrivateRoute'
+import { Form, Label, Input, FormGroup, Navbar, Button, Card, CardHeader,  NavItem, Nav, CardTitle } from 'reactstrap';
 
 const initialProject = {
   "title": "",
@@ -36,7 +37,7 @@ const initialProject = {
   }}) 
   .then(res => {
       console.log(res.data)
-      // setDependency(true)
+      
   })
   .catch(err => {
       console.log(err)
@@ -45,53 +46,63 @@ const initialProject = {
 
 useEffect(() => {
   props.getData()
+ 
 },[])
         return (
             <div>
-              <h2>Projects List</h2>
+                
+
+              <h2 style={{color:"whitesmoke", background:"#FF6484"}}>Projects List</h2>
               {props.projects.length > 0 ? props.projects.map(project => {
                 return (
-                    <div style={{border:"1px solid black", margin:"0 auto", width:"50%"}}  key={project.id}>
-                    <p> Title: {project.title}</p>
-                    <p> Project ID #: {project.id} </p>
-                    <p> Summary: { project.summary}</p>
-                    <p> Importance: {project.importance}</p>
+                    
+                    <div style={{border:"1px solid black", margin:"10px auto", width:"50%", borderRadius:"2%", background:"rgba(0,0,0,.5)"}}  key={project.id}>
+                    <h1 style={{margin:"5%", background:'whitesmoke', border:"2%"}}> Title: {project.title} </h1>
+                    <p style={{color:"whitesmoke"}}> Project ID #: {project.id} </p>
+                    <p style={{color:"whitesmoke"}}> Summary: { project.summary}</p>
+                    <p style={{color:"whitesmoke"}}> Importance: {project.importance}</p>
             {/* <p> Value 1: {project.values[0].value_name}</p> */}
-            <h4>Value 1: {project.values[0].value_name}</h4>
-            <h4>Value 1: {project.values[1].value_name}</h4>
+            <p style={{color:"whitesmoke"}}>Value 1: {project.values[0].value_name}</p>
+            <p style={{color:"whitesmoke"}}>Value 2: {project.values[1].value_name}</p>
             
-            <button onClick={removeProject(project.id)}>Remove Projects</button>
-<button onClick={()=> editProject(project)}> Edit Project </button>
-
+            <Button style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ', width: '30%', margin:'2%' }} onClick={removeProject(project.id)}>Remove Projects </Button>
+<Button style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ', width: '30%' }} onClick={()=> editProject(project)}> Edit Project </Button>
+     
                     </div>
+                    
+               
+                    
 
                 )
+               
+         
               }) : <h2>Loading...</h2> }
 
 <form onSubmit={saveUpdate}>
               <legend>Update Project </legend>
               <label>
-                 Title
-                  <input 
+                 Title:
+                  <Input 
                       onChange={e =>
                           setProjectToEdit({ ...projectToEdit, title: e.target.value })
                       }
                       value={projectToEdit.title}
                   />
               </label>
+              <br/>
               <label>
-                  summary:
-                  <input 
+                  Summary:
+                  <Input 
                       onChange={e =>
                           setProjectToEdit({ ...projectToEdit, summary: e.target.value })
                       }
                       value={projectToEdit.summary}
                   />
               </label>
-
+              <br/>
               <label>
-              importance:
-<input 
+              Importance:
+<Input 
                      onChange={e =>
                           setProjectToEdit({ ...projectToEdit, importance: e.target.value })
                       }
@@ -101,7 +112,8 @@ useEffect(() => {
             
              
               <div>
-                  <button type="submit">Update</button>
+              <br/>
+                  <Button style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ', width: '50%', marginLeft:'35%', display:"block" }} type="submit">Update</Button>
               </div>
               </label>
          </form>
