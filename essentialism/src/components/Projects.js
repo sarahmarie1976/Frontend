@@ -39,7 +39,7 @@ const Projects = ({ projectToEdit, setProjectToEdit, editing, setEditing, initia
 
     
 
-// const { push } = useHistory(); 
+const { push } = useHistory(); 
 
 
 
@@ -75,7 +75,7 @@ const addProject = (e) => {
       setProject(res.data);
       setProjectToEdit(project);
       console.log('this response',res.data)
-      // push('/fetch')
+      push('/fetch')
     })
     .catch((err) => {
       console.log('error from adding project',err);
@@ -95,8 +95,19 @@ const addProject = (e) => {
 
         return (
 <>
-            
-            <Button onClick={addProject}>  click </Button>
+<h1> New project: </h1>
+            <p> Title: test title </p>
+      <p> Summary:  lorem ipsum summary" </p>
+      <p> Importance: "4"</p>
+       <p> Values: [
+       id:'5',
+       value_name:'Autonomy'
+      ,
+      id:'6',
+      "value_name":'Balance'
+     
+            </p>
+            <Button style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ', width: '15%', display:"block", margin:"0 auto" , color:"white", marginTop:"10%"}} onClick={addProject}>  Add new project </Button>
             </>
           );
         }

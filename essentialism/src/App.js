@@ -16,7 +16,7 @@ export default function App() {
     <Router>
       
       <div className="App">
-        <PrivateRoute exact path="/projects"  component={Projects}  />
+      <PrivateRoute exact path="/projects"  component={Projects}  />
        
         <Route exact path="/users/:id" component={User} />
         <Route exact path="/fetch" component={TestProjectsFetch} />

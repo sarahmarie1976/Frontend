@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {FETCH_DATA, FETCH_SUCCESS,FETCH_FAILURE} from '../action/action'
 import projectsReducer from '../reducer/reducer';
-import { getData } from '../action/TestingActionFunctions' 
+import { getData } from '../action/action' 
 import {connect} from 'react-redux'
 import  { axiosWithAuth }  from  '../utils/axiosWithAuth'
 import { removeProject } from '../action/action'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import Projects from './Projects'
 import PrivateRoute from './PrivateRoute'
 import { Form, Label, Input, FormGroup, Navbar, Button, Card, CardHeader,  NavItem, Nav, CardTitle } from 'reactstrap';
@@ -29,7 +29,7 @@ const initialProject = {
   console.log(project, 'why no log');
 }  
 
- const saveUpdate = e => {
+ const saveUpdate = (e) => {
   e.preventDefault();
   axiosWithAuth()
   .put(`projects/${projectToEdit.id}`, projectToEdit,  { headers: {
@@ -113,12 +113,14 @@ useEffect(() => {
              
               <div>
               <br/>
-                  <Button style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ', width: '50%', marginLeft:'35%', display:"block" }} type="submit">Update</Button>
+                  <Button style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ', width: '150px', margin:"0 auto", display:"block" }} type="submit">Update</Button>
+                  
               </div>
               </label>
          </form>
+         <Button style={{  background: '#FF6484', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', fontWeight: 'bold' , textShadow: '2px 2px 8px #C0C0C0 ', width: '150px', display:"block", margin:"0 auto" , color:"white"}}> 
+        <Link to="/projects"> <PrivateRoute exact path='/projects' component={Projects}  projectToEdit={projectToEdit} setProjectToEdit={setProjectToEdit} editing={editing} setEditing={setEditing} initialProject={initialProject} /> Add Project </Link> </Button> 
 
-             <PrivateRoute exact path='/projects' component={Projects}  projectToEdit={projectToEdit} setProjectToEdit={setProjectToEdit} editing={editing} setEditing={setEditing} initialProject={initialProject} /> 
             </div>
           )
     
