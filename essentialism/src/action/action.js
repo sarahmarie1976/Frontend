@@ -19,7 +19,17 @@ export const removeProject = ( project ) => {
       axiosWithAuth()
       .delete(`/projects/${project}`,   { headers: {
         'Authorization': `Bearer ${localStorage.token}`
-      }})
+      
+      }
+     
+    })  
+    .then( res => {
+      window.location.reload();
+
+    }
+      )
+      
+  
     }
   }
 
